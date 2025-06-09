@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Chatbot Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 Insurance Assistant</h1>
+            <p>Your AI-powered insurance advisor</p>
+        </header>
+        
+        <div class="chat-container">
+            <div id="chat-messages" class="chat-messages">
+                <div class="message bot-message">
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-content">
+                        <p>Hello! I'm your insurance assistant. I can help you with:</p>
+                        <ul>
+                            <li>📋 Filing and tracking claims</li>
+                            <li>💰 Premium estimates and calculations</li>
+                            <li>📄 Policy information and coverage details</li>
+                            <li>❓ General insurance FAQs</li>
+                        </ul>
+                        <p>How can I assist you today?</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-container">
+                <input type="text" id="user-input" placeholder="Type your message here..." 
+                       onkeypress="if(event.key === 'Enter') sendMessage()">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+        
+        <div class="quick-actions">
+            <h3>Quick Actions</h3>
+            <div class="action-buttons">
+                <button class="action-btn" onclick="quickAction('How do I file a claim?')">
+                    File a Claim
+                </button>
+                <button class="action-btn" onclick="quickAction('What factors affect my premium?')">
+                    Premium Info
+                </button>
+                <button class="action-btn" onclick="quickAction('What coverage do I need?')">
+                    Coverage Help
+                </button>
+                <button class="action-btn" onclick="quickAction('How can I contact support?')">
+                    Contact Support
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

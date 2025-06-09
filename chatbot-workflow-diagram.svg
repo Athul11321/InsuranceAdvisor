@@ -1,0 +1,226 @@
+<svg viewBox="0 0 1200 1400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="600" y="40" font-size="28" font-weight="bold" text-anchor="middle" fill="#1e40af">Insurance Chatbot Response Generation Workflow</text>
+  
+  <!-- User Input Section -->
+  <g id="user-input">
+    <!-- User Icon -->
+    <circle cx="100" cy="120" r="30" fill="#3b82f6" stroke="#1e40af" stroke-width="2"/>
+    <path d="M85 110 Q100 100 115 110 L115 115 Q100 125 85 115 Z" fill="white"/>
+    <circle cx="100" cy="125" r="8" fill="white"/>
+    
+    <!-- Input Box -->
+    <rect x="150" y="90" width="350" height="60" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+    <text x="325" y="115" font-size="16" text-anchor="middle" fill="#1e40af" font-weight="bold">User Input</text>
+    <text x="325" y="135" font-size="14" text-anchor="middle" fill="#64748b">"How do I file a claim?"</text>
+    
+    <!-- Arrow to Flask -->
+    <path d="M500 120 L550 120" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrowblue)"/>
+  </g>
+  
+  <!-- Flask Server -->
+  <g id="flask-server">
+    <rect x="550" y="80" width="180" height="80" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="640" y="105" font-size="16" text-anchor="middle" fill="#16a34a" font-weight="bold">Flask Server</text>
+    <text x="640" y="125" font-size="14" text-anchor="middle" fill="#64748b">POST /chat</text>
+    <text x="640" y="145" font-size="12" text-anchor="middle" fill="#64748b">Receives JSON</text>
+    
+    <!-- Arrow to Chatbot -->
+    <path d="M640 160 L640 210" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowgreen)"/>
+  </g>
+  
+  <!-- Main Chatbot Processing -->
+  <g id="chatbot-core">
+    <rect x="450" y="210" width="380" height="60" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="640" y="235" font-size="16" text-anchor="middle" fill="#d97706" font-weight="bold">InsuranceChatbot.generate_response()</text>
+    <text x="640" y="255" font-size="14" text-anchor="middle" fill="#92400e">Main Processing Pipeline</text>
+  </g>
+  
+  <!-- Decision: Model Loaded? -->
+  <g id="model-check">
+    <path d="M640 270 L710 340 L640 410 L570 340 Z" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="640" y="335" font-size="14" text-anchor="middle" fill="#7f1d1d">Model</text>
+    <text x="640" y="355" font-size="14" text-anchor="middle" fill="#7f1d1d">Loaded?</text>
+    
+    <!-- No path -->
+    <path d="M570 340 L450 340" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowred)"/>
+    <text x="500" y="330" font-size="12" fill="#dc2626">No</text>
+    
+    <!-- Yes path -->
+    <path d="M710 340 L780 340 L780 420" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowgreen)"/>
+    <text x="750" y="330" font-size="12" fill="#16a34a">Yes</text>
+  </g>
+  
+  <!-- Fallback Response (No Model) -->
+  <g id="fallback-no-model">
+    <rect x="250" y="310" width="200" height="60" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="350" y="335" font-size="14" text-anchor="middle" fill="#dc2626" font-weight="bold">Fallback Response</text>
+    <text x="350" y="355" font-size="12" text-anchor="middle" fill="#7f1d1d">Pre-defined answers</text>
+    
+    <!-- Arrow to final response -->
+    <path d="M350 370 L350 1250" stroke="#dc2626" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrowred)"/>
+  </g>
+  
+  <!-- Cache Check -->
+  <g id="cache-check">
+    <rect x="680" y="420" width="200" height="80" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+    <text x="780" y="445" font-size="14" text-anchor="middle" fill="#0c4a6e" font-weight="bold">Cache Check</text>
+    <text x="780" y="465" font-size="12" text-anchor="middle" fill="#0c4a6e">1. Exact Match</text>
+    <text x="780" y="485" font-size="12" text-anchor="middle" fill="#0c4a6e">2. Fuzzy Match (85%)</text>
+    
+    <!-- Cache paths -->
+    <path d="M780 500 L780 530" stroke="#0284c7" stroke-width="2" marker-end="url(#arrowblue)"/>
+  </g>
+  
+  <!-- Cache Decision -->
+  <g id="cache-decision">
+    <path d="M780 530 L850 580 L780 630 L710 580 Z" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+    <text x="780" y="575" font-size="14" text-anchor="middle" fill="#0c4a6e">Cache</text>
+    <text x="780" y="595" font-size="14" text-anchor="middle" fill="#0c4a6e">Hit?</text>
+    
+    <!-- Hit path -->
+    <path d="M850 580 L950 580 L950 1250" stroke="#16a34a" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrowgreen)"/>
+    <text x="900" y="570" font-size="12" fill="#16a34a">Yes</text>
+    <text x="970" y="620" font-size="11" fill="#16a34a">~0.001s</text>
+    
+    <!-- Miss path -->
+    <path d="M710 580 L610 580 L610 660" stroke="#0284c7" stroke-width="2" marker-end="url(#arrowblue)"/>
+    <text x="650" y="570" font-size="12" fill="#0284c7">No</text>
+  </g>
+  
+  <!-- Critical Topic Check -->
+  <g id="critical-check">
+    <rect x="510" y="660" width="200" height="80" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="610" y="685" font-size="14" text-anchor="middle" fill="#92400e" font-weight="bold">Critical Topic?</text>
+    <text x="610" y="705" font-size="11" text-anchor="middle" fill="#92400e">claim, coverage,</text>
+    <text x="610" y="720" font-size="11" text-anchor="middle" fill="#92400e">payment, emergency</text>
+    
+    <path d="M610 740 L610 770" stroke="#f59e0b" stroke-width="2" marker-end="url(#arroworange)"/>
+  </g>
+  
+  <!-- Critical Decision -->
+  <g id="critical-decision">
+    <path d="M610 770 L680 820 L610 870 L540 820 Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="610" y="815" font-size="14" text-anchor="middle" fill="#92400e">Is</text>
+    <text x="610" y="835" font-size="14" text-anchor="middle" fill="#92400e">Critical?</text>
+    
+    <!-- Yes - Enhanced Fallback -->
+    <path d="M540 820 L400 820" stroke="#f59e0b" stroke-width="2" marker-end="url(#arroworange)"/>
+    <text x="460" y="810" font-size="12" fill="#f59e0b">Yes</text>
+    
+    <!-- No - Model Generation -->
+    <path d="M680 820 L820 820" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrowpurple)"/>
+    <text x="750" y="810" font-size="12" fill="#8b5cf6">No</text>
+  </g>
+  
+  <!-- Enhanced Fallback -->
+  <g id="enhanced-fallback">
+    <rect x="200" y="780" width="200" height="80" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="300" y="805" font-size="14" text-anchor="middle" fill="#92400e" font-weight="bold">Enhanced Fallback</text>
+    <text x="300" y="825" font-size="12" text-anchor="middle" fill="#92400e">Topic-specific</text>
+    <text x="300" y="845" font-size="12" text-anchor="middle" fill="#92400e">High-quality response</text>
+    
+    <!-- Arrow to final -->
+    <path d="M300 860 L300 1250" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arroworange)"/>
+    <text x="320" y="900" font-size="11" fill="#f59e0b">~0.01s</text>
+  </g>
+  
+  <!-- Model Generation -->
+  <g id="model-generation">
+    <rect x="820" y="780" width="220" height="80" rx="10" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="2"/>
+    <text x="930" y="805" font-size="14" text-anchor="middle" fill="#6b21a8" font-weight="bold">Model Generation</text>
+    <text x="930" y="825" font-size="12" text-anchor="middle" fill="#6b21a8">Temperature: 0.7</text>
+    <text x="930" y="845" font-size="12" text-anchor="middle" fill="#6b21a8">Max Length: 150</text>
+    
+    <path d="M930 860 L930 900" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrowpurple)"/>
+  </g>
+  
+  <!-- Quality Check -->
+  <g id="quality-check">
+    <rect x="820" y="900" width="220" height="100" rx="10" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="2"/>
+    <text x="930" y="925" font-size="14" text-anchor="middle" fill="#6b21a8" font-weight="bold">Quality Validation</text>
+    <text x="930" y="945" font-size="11" text-anchor="middle" fill="#6b21a8">✓ Length: 30-300 chars</text>
+    <text x="930" y="960" font-size="11" text-anchor="middle" fill="#6b21a8">✓ No placeholders</text>
+    <text x="930" y="975" font-size="11" text-anchor="middle" fill="#6b21a8">✓ Insurance relevant</text>
+    <text x="930" y="990" font-size="11" text-anchor="middle" fill="#6b21a8">✓ Not repetitive</text>
+    
+    <path d="M930 1000 L930 1030" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrowpurple)"/>
+  </g>
+  
+  <!-- Quality Decision -->
+  <g id="quality-decision">
+    <path d="M930 1030 L1000 1080 L930 1130 L860 1080 Z" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="2"/>
+    <text x="930" y="1075" font-size="14" text-anchor="middle" fill="#6b21a8">Quality</text>
+    <text x="930" y="1095" font-size="14" text-anchor="middle" fill="#6b21a8">Pass?</text>
+    
+    <!-- Pass -->
+    <path d="M930 1130 L930 1160" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowgreen)"/>
+    <text x="950" y="1150" font-size="12" fill="#16a34a">Yes</text>
+    
+    <!-- Fail -->
+    <path d="M860 1080 L400 1080 L400 860" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowred)"/>
+    <text x="840" y="1070" font-size="12" fill="#dc2626">No</text>
+  </g>
+  
+  <!-- Response Cleaning -->
+  <g id="response-cleaning">
+    <rect x="820" y="1160" width="220" height="60" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="930" y="1180" font-size="14" text-anchor="middle" fill="#166534" font-weight="bold">Response Cleaning</text>
+    <text x="930" y="1200" font-size="12" text-anchor="middle" fill="#166534">Format & Cache</text>
+    
+    <!-- Arrow to final -->
+    <path d="M930 1220 L930 1250" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowgreen)"/>
+    <text x="950" y="1240" font-size="11" fill="#16a34a">1-2s total</text>
+  </g>
+  
+  <!-- Final Response -->
+  <g id="final-response">
+    <rect x="450" y="1250" width="380" height="80" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+    <text x="640" y="1275" font-size="16" text-anchor="middle" fill="#166534" font-weight="bold">JSON Response</text>
+    <text x="640" y="1295" font-size="14" text-anchor="middle" fill="#166534">"To file a claim: Call 1-800-INSURANCE..."</text>
+    <text x="640" y="1315" font-size="12" text-anchor="middle" fill="#64748b">+ timestamp + history update</text>
+  </g>
+  
+  <!-- Response Time Legend -->
+  <g id="legend">
+    <text x="50" y="1380" font-size="14" font-weight="bold" fill="#1e40af">Response Times:</text>
+    <circle cx="200" cy="1375" r="5" fill="#16a34a"/>
+    <text x="215" y="1380" font-size="12" fill="#64748b">Cache Hit: ~0.001s</text>
+    <circle cx="350" cy="1375" r="5" fill="#f59e0b"/>
+    <text x="365" y="1380" font-size="12" fill="#64748b">Fallback: ~0.01s</text>
+    <circle cx="500" cy="1375" r="5" fill="#8b5cf6"/>
+    <text x="515" y="1380" font-size="12" fill="#64748b">Model: 1-2s</text>
+  </g>
+  
+  <!-- Prompt Template Display -->
+  <g id="prompt-template">
+    <rect x="50" y="900" width="300" height="140" rx="5" fill="#f8fafc" stroke="#64748b" stroke-width="1"/>
+    <text x="60" y="920" font-size="12" font-weight="bold" fill="#1e293b">Model Prompt Template:</text>
+    <text x="60" y="940" font-size="10" font-family="monospace" fill="#475569">### Instruction:</text>
+    <text x="60" y="955" font-size="10" font-family="monospace" fill="#475569">You are a helpful insurance</text>
+    <text x="60" y="970" font-size="10" font-family="monospace" fill="#475569">assistant. Provide clear,</text>
+    <text x="60" y="985" font-size="10" font-family="monospace" fill="#475569">accurate, and professional</text>
+    <text x="60" y="1000" font-size="10" font-family="monospace" fill="#475569">responses about insurance topics.</text>
+    <text x="60" y="1015" font-size="10" font-family="monospace" fill="#475569">User: {user_input}</text>
+    <text x="60" y="1030" font-size="10" font-family="monospace" fill="#475569">### Response:</text>
+  </g>
+  
+  <!-- Arrows -->
+  <defs>
+    <marker id="arrowblue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowgreen" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#16a34a"/>
+    </marker>
+    <marker id="arrowred" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#dc2626"/>
+    </marker>
+    <marker id="arroworange" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arrowpurple" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#8b5cf6"/>
+    </marker>
+  </defs>
+</svg>

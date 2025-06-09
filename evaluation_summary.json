@@ -1,0 +1,57 @@
+{
+  "accuracy": 0.5142307692307693,
+  "avg_similarity": 0.1467201862672832,
+  "avg_bleu_score": 0.02614529106511273,
+  "total_samples": 7800,
+  "intent_distribution": {
+    "general": 4011,
+    "premium": 1315,
+    "coverage": 871,
+    "policy": 840,
+    "claim": 763
+  },
+  "confusion_matrix": [
+    [
+      0,
+      0,
+      763,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      871,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      4011,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      840,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1315,
+      0,
+      0
+    ]
+  ],
+  "intent_labels": [
+    "claim",
+    "coverage",
+    "general",
+    "policy",
+    "premium"
+  ]
+}
